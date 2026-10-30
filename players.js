@@ -48,8 +48,8 @@ window.PLAYERS = [
   "twitch": true
  },
  {
-  "login": "livewithisa",
-  "name": "LiveWithIsa",
+  "login": "livewithliza",
+  "name": "LiveWithLiza",
   "mc": "Immuniteit",
   "twitch": true
  },
