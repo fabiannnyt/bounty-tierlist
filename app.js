@@ -117,7 +117,7 @@ function card(login, opts = {}) {
   const c = el("div", "card"); c.dataset.login = login;
   c.title = p.twitch ? `twitch.tv/${p.name}  ·  MC: ${p.mc}` : `Minecraft: ${p.mc} (geen Twitch)`;
   if (me && login === me.login) c.classList.add("me-card");
-  const img = el("img"); img.src = `img/${login}.webp`; img.alt = ""; img.draggable = false; img.loading = "lazy"; img.width = 64; img.height = 64;
+  const img = el("img"); img.src = `img/${login}.webp?v=2`; img.alt = ""; img.draggable = false; img.loading = "lazy"; img.width = 64; img.height = 64;
   const badge = p.twitch ? el("span", "tw") : el("span", "mc", "MC");
   if (p.twitch) badge.innerHTML = TW_ICON;
   c.append(img, el("span", "nm", p.name), badge);
