@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bounty SMP Tierlist</title>
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+<style>
+:root{
+  --bg:#0f0b0a; --bg2:#16100e; --panel:#1c1512; --panel2:#241b17; --line:#33271f; --line2:#46362b;
+  --fg:#efe6d4; --muted:#a8998a; --faint:#6f6157;
+  --gold:#e0ac40; --gold2:#f1c45a; --red:#d92e2e; --blood:#7a0000;
+  --S:#e5484d; --A:#f0883e; --B:#e8c547; --C:#5fbf6b; --D:#4c9ee8; --F:#9a6be0;
+  --f-pix:"Pixelify Sans",ui-monospace,monospace; --f:"DM Sans",system-ui,sans-serif;
+  --card:84px; --img:64px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f);font-size:15px;line-height:1.45}
+body{min-height:100vh;background:
+  radial-gradient(900px 500px at 50% -200px,rgba(224,172,64,.10),transparent 70%),
+  radial-gradient(700px 400px at 100% 100%,rgba(122,0,0,.14),transparent 70%),var(--bg);background-attachment:fixed}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+img{display:block}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* ---------- Login ---------- */
+.login{min-height:100vh;display:grid;place-items:center;padding:32px 16px;position:relative;overflow:hidden}
+.faces{position:absolute;inset:-40px;display:grid;grid-template-columns:repeat(auto-fill,72px);gap:14px;justify-content:center;align-content:center;opacity:.13;filter:grayscale(.4);transform:rotate(-8deg) scale(1.15);pointer-events:none}
+.faces img{width:72px;height:72px;border-radius:12px}
+.login::after{content:"";position:absolute;inset:0;background:radial-gradient(closest-side,rgba(15,11,10,.55),var(--bg));pointer-events:none}
+.login-card{position:relative;z-index:1;width:100%;max-width:400px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line2);border-radius:18px;padding:32px 28px 26px;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.04);text-align:center}
+.login-card .logo{width:72px;height:72px;margin:0 auto 14px;image-rendering:pixelated;filter:drop-shadow(0 6px 18px rgba(224,172,64,.25))}
+.login-card h1{font-family:var(--f-pix);font-weight:700;font-size:34px;margin:0;letter-spacing:.01em;line-height:1.05}
+.login-card h1 span{color:var(--gold)}
+.login-card p.sub{margin:8px 0 24px;color:var(--muted);font-size:14px}
+.field{text-align:left}
+.field label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}
+.inp{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--line2);border-radius:10px;padding:0 12px;transition:border-color .15s}
+.inp:focus-within{border-color:var(--gold)}
+.inp svg{flex:none;color:#9146ff}
+.inp input{flex:1;min-width:0;border:0;background:none;padding:12px 0;outline:none;font-size:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line2);background:var(--panel2);border-radius:10px;padding:9px 14px;font-weight:700;font-size:14px;transition:background .15s,border-color .15s,transform .05s}
+.btn:hover{border-color:var(--faint)}
+.btn:active{transform:translateY(1px)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#1a1108}
+.btn.gold:hover{background:var(--gold2);border-color:var(--gold2)}
+.btn.ghost{background:transparent}
+.btn.warn{color:#ff8a8a}
+.btn.warn.armed{background:var(--red);border-color:var(--red);color:#fff}
+.btn:disabled{opacity:.5;cursor:default}
+.login-card .btn.gold{width:100%;margin-top:14px;padding:13px;font-size:15px}
+.err{min-height:20px;margin-top:10px;color:#ff8a8a;font-size:13px}
+.hint{margin-top:14px;font-size:12.5px;color:var(--faint)}
+
+/* ---------- App ---------- */
+.wrap{max-width:1200px;margin:0 auto;padding:18px 18px 60px}
+header.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:6px 0 18px}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto}
+.brand img{width:42px;height:42px;image-rendering:pixelated}
+.brand h1{font-family:var(--f-pix);font-size:24px;margin:0;line-height:1}
+.brand h1 span{color:var(--gold)}
+.brand small{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+.tabs{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:4px;gap:2px}
+.tab{border:0;background:none;padding:8px 14px;border-radius:9px;font-weight:700;font-size:14px;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--panel2);color:var(--fg);box-shadow:inset 0 0 0 1px var(--line2)}
+.me{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 4px}
+.me img{width:30px;height:30px;border-radius:50%}
+.me b{font-size:14px}
+.me button{border:0;background:none;color:var(--muted);font-size:12.5px;padding:4px 8px;border-radius:999px}
+.me button:hover{color:var(--fg);background:var(--panel2)}
+
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.toolbar h2{font-size:18px;margin:0 auto 0 0;display:flex;align-items:baseline;gap:10px}
+.toolbar h2 small{font-size:13px;color:var(--muted);font-weight:500}
+.status{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--C)}
+.status.busy i{background:var(--gold);animation:pulse 1s infinite}
+.status.bad i{background:var(--red)}
+@keyframes pulse{50%{opacity:.3}}
+
+/* Board */
+.board,.pool{user-select:none;-webkit-user-select:none}
+.board{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
+.row{display:flex;min-height:calc(var(--card) + 28px);border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.label{flex:none;width:92px;display:grid;place-items:center;font-family:var(--f-pix);font-weight:700;font-size:40px;color:#160f0b;background:var(--c);position:relative;user-select:none;border:0;padding:0}
+.label::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent 45%,rgba(0,0,0,.15))}
+.label small{position:absolute;bottom:6px;font-family:var(--f);font-size:11px;font-weight:700;opacity:.65}
+.zone{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-content:flex-start;gap:8px;padding:10px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 7%,transparent),transparent 40%)}
+.zone.over{background:color-mix(in srgb,var(--c) 14%,transparent);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--c) 60%,transparent)}
+.zone .empty{align-self:center;color:var(--faint);font-size:13px;padding-left:4px;pointer-events:none}
+.selecting .row .label{cursor:pointer}
+.selecting .row:hover .zone{background:color-mix(in srgb,var(--c) 12%,transparent)}
+
+.pool{margin-top:16px;border:1px dashed var(--line2);border-radius:14px;background:rgba(28,21,18,.6)}
+.pool-h{display:flex;align-items:center;gap:10px;padding:12px 14px 0;flex-wrap:wrap}
+.pool-h h3{margin:0 auto 0 0;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.pool-h h3 b{color:var(--fg)}
+.search{display:flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:0 10px}
+.search input{border:0;background:none;outline:none;padding:7px 0;width:170px;font-size:14px}
+.search svg{color:var(--faint)}
+.pool .zone{--c:var(--gold);background:none;min-height:120px;padding:12px 14px 14px}
+.pool .zone.over{background:rgba(224,172,64,.06)}
+
+/* Card */
+.card{width:var(--card);flex:none;display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 4px 5px;border-radius:10px;background:var(--panel2);border:1px solid var(--line2);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;position:relative;transition:border-color .12s,transform .12s,box-shadow .12s}
+.editable .card{cursor:grab}
+.editable .card:hover{border-color:var(--faint);transform:translateY(-1px)}
+.card img{width:var(--img);height:var(--img);border-radius:8px;background:#0b0807;pointer-events:none;-webkit-user-drag:none}
+.card .nm{max-width:100%;font-size:11.5px;font-weight:700;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px}
+.card .tw{position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:4px;background:#9146ff;display:grid;place-items:center;opacity:.95}
+.card .tw svg{width:10px;height:10px;color:#fff}
+.card .mc{position:absolute;top:3px;right:3px;font-size:9px;font-weight:700;background:#3b7d34;color:#fff;border-radius:4px;padding:1px 4px}
+.card.me-card{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.card.sel{border-color:var(--gold);box-shadow:0 0 0 3px rgba(224,172,64,.35)}
+.card.placeholder{opacity:.25;border-style:dashed}
+.card.hidden-by-search{display:none}
+.drag-ghost{position:fixed;left:0;top:0;z-index:50;pointer-events:none;transform-origin:center;box-shadow:0 18px 40px rgba(0,0,0,.6);border-color:var(--gold)!important;rotate:-3deg;scale:1.08}
+body.dragging,body.dragging *{cursor:grabbing!important}
+
+.tip{margin-top:12px;font-size:13px;color:var(--faint)}
+.tip kbd{font-family:var(--f);background:var(--panel2);border:1px solid var(--line2);border-radius:5px;padding:0 5px;color:var(--muted)}
+
+/* Others */
+.people{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.person{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 12px 4px 4px;font-size:13.5px;font-weight:700}
+.person img{width:26px;height:26px;border-radius:50%}
+.person small{color:var(--muted);font-weight:500}
+.person[aria-pressed="true"]{border-color:var(--gold);background:var(--panel2)}
+.none{border:1px dashed var(--line2);border-radius:14px;padding:40px 20px;text-align:center;color:var(--muted)}
+.readonly .card{cursor:default}
+
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--panel2);border:1px solid var(--line2);padding:10px 16px;border-radius:10px;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:60}
+
+@media (max-width:640px){
+  :root{--card:70px;--img:52px}
+  .wrap{padding:12px 10px 50px}
+  .label{width:54px;font-size:30px}
+  .zone{gap:6px;padding:8px}
+  .brand h1{font-size:20px}
+  .tabs{order:3;width:100%}
+  .tab{flex:1}
+  .search input{width:120px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<section class="login" id="login" hidden>
+  <div class="faces" id="faces" aria-hidden="true"></div>
+  <form class="login-card" id="login-form" autocomplete="off">
+    <img class="logo" src="img/logo.png" alt="">
+    <h1>Bounty SMP <span>Tierlist</span></h1>
+    <p class="sub">Rank alle spelers van S tot F. Je lijst wordt automatisch opgeslagen.</p>
+    <div class="field">
+      <label for="name">Jouw Twitch-naam</label>
+      <div class="inp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.3 3 3 6.4v13.1h4.5V22h2.5l2.5-2.5h3.6L21 14.6V3H4.3Zm15.1 10.8-2.7 2.7h-4.5l-2.4 2.4v-2.4H6V4.7h13.4v9.1Zm-2.7-5.6v4.7h-1.6V8.2h1.6Zm-4.5 0v4.7h-1.6V8.2h1.6Z"/></svg>
+        <input id="name" name="name" placeholder="bijv. FabiannnYT" required maxlength="40" spellcheck="false" autocapitalize="off">
+      </div>
+    </div>
+    <button class="btn gold" type="submit" id="login-btn">Inloggen</button>
+    <div class="err" id="login-err" role="alert"></div>
+    <div class="hint">Alleen spelers van de Bounty SMP kunnen inloggen. Geen Twitch? Gebruik je Minecraft-naam.</div>
+  </form>
+</section>
+
+<!-- App -->
+<div class="wrap" id="app" hidden>
+  <header class="top">
+    <div class="brand">
+      <img src="img/logo.png" alt="">
+      <div><h1>Bounty SMP <span>Tierlist</span></h1><small id="count-saved">&nbsp;</small></div>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-mine" aria-selected="true">Mijn tierlist</button>
+      <button class="tab" role="tab" id="tab-others" aria-selected="false">Lijsten van anderen</button>
+    </div>
+    <div class="me"><img id="me-img" alt=""><b id="me-name"></b><button id="logout" type="button">Uitloggen</button></div>
+  </header>
+
+  <!-- Mijn tierlist -->
+  <section id="view-mine">
+    <div class="toolbar">
+      <h2>Mijn tierlist <small id="progress"></small></h2>
+      <span class="status" id="status"><i></i><span>Laden…</span></span>
+      <button class="btn warn ghost" id="reset" type="button">Alles terugzetten</button>
+    </div>
+    <div class="board editable" id="board"></div>
+    <div class="pool editable" id="pool-wrap">
+      <div class="pool-h">
+        <h3>Nog in te delen <b id="pool-count">0</b></h3>
+        <label class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Zoek speler…" aria-label="Zoek speler"></label>
+      </div>
+      <div class="zone" id="pool" data-tier="pool"></div>
+    </div>
+    <p class="tip">Sleep een speler naar een tier. Op je telefoon: tik een speler aan en tik daarna op een tier (of houd hem even vast om te slepen).</p>
+  </section>
+
+  <!-- Anderen -->
+  <section id="view-others" hidden>
+    <div class="toolbar"><h2 id="other-title">Lijsten van anderen</h2><span class="status" id="other-when"></span></div>
+    <div class="people" id="people"></div>
+    <div id="other-board-wrap"></div>
+  </section>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="players.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
