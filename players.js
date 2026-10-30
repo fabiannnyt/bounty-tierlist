@@ -216,10 +216,10 @@ window.PLAYERS = [
   "twitch": true
  },
  {
-  "login": "vriesko",
-  "name": "vriesko",
+  "login": "turbotweakers",
+  "name": "Turbotweakers",
   "mc": "vriesko",
-  "twitch": false
+  "twitch": true
  },
  {
   "login": "borrelmanlive",
