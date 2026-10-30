@@ -244,5 +244,11 @@ window.PLAYERS = [
   "name": "Shellebel",
   "mc": "Shellebel",
   "twitch": true
+ },
+ {
+  "login": "iriszlive",
+  "name": "iriszlive",
+  "mc": "Iriszzzz",
+  "twitch": true
  }
 ];
