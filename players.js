@@ -228,8 +228,8 @@ window.PLAYERS = [
   "twitch": true
  },
  {
-  "login": "janpieterzaadgieter",
-  "name": "janpieterzaadgieter",
+  "login": "janpieterzaadgieter_",
+  "name": "Janpieterzaadgieter_",
   "mc": "Janpieterzg1",
   "twitch": true
  },
