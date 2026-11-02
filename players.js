@@ -250,5 +250,11 @@ window.PLAYERS = [
   "name": "iriszlive",
   "mc": "Iriszzzz",
   "twitch": true
+ },
+ {
+  "login": "r3dlet",
+  "name": "R3DLET",
+  "mc": "R3DLET",
+  "twitch": true
  }
 ];
